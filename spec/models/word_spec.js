@@ -1,7 +1,7 @@
 // Do not remove
 import Word from 'models/word';
 
-describe('Word', () => {
+describe('Word', () => { // can also write it function() {
   describe('constructor', () => {
     it('Tracks text', () => {
       var word = new Word({
@@ -26,6 +26,7 @@ describe('Word', () => {
         const word = new Word({ text: text });
 
         expect(word.isValid()).toBeTruthy(`word: ${text}, error: ${word.validationError}`);
+        //2nd argument is for: if test fails it will console log this to show me what happened ("error:${word.validationError}")
       });
     });
 
@@ -85,15 +86,23 @@ describe('Word', () => {
 
   describe('score', () => {
     it ('Correctly scores simple words', () => {
-      // TODO
+      var word = new Word({text: "cat"});
+
+      expect(word.score()).toEqual(5);
     });
 
     it ('Adds 50 points for a 7-letter word', () => {
-      // TODO
+      var word7 = new Word({text: "lizards"}) //lizards is 17 points +50
+
+      expect(word7.score()).toEqual(67);
     });
 
     it ('Returns undefined if the word is invalid', () => {
-      // TODO
+      var invalidWord = new Word({text: "@!akajk"})
+      expect(invalidWord.score()).not.toBeDefined();
+
+      var invalidWord = new Word({text: "aaaaaaaa"})
+      expect(invalidWord.score()).not.toBeDefined();
     });
   });
 });

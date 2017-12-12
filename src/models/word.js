@@ -91,8 +91,20 @@ const Word = Backbone.Model.extend({
   },
 
   score() {
-    // TODO: test and implement
-    return 0;
+  let score = 0
+  if (this.isValid()) {
+
+    let word = this.get('text').split("");
+    word.forEach(function(letter) {
+      score += LETTERS[letter];
+    });
+    if (word.length === 7) {
+      score += 50;
+    }
+  } else {
+    return undefined;
+  }
+    return score;
   }
 });
 
